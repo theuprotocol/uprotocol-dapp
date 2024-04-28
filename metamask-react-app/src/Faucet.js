@@ -6,6 +6,8 @@ const Faucet = ({ account }) => {
   const [provider, setProvider] = useState(null);
   const [contract1, setContract1] = useState(null);
   const [contract2, setContract2] = useState(null);
+  const [decimals1, setDecimals1] = useState('');
+  const [decimals2, setDecimals2] = useState('');
   const [amount1, setAmount1] = useState('');
   const [amount2, setAmount2] = useState('');
   const [transactionHash1, setTransactionHash1] = useState('');
@@ -16,6 +18,8 @@ const Faucet = ({ account }) => {
   const [tokenSymbol2, setTokenSymbol2] = useState('');
   const [error1, setError1] = useState(null);
   const [error2, setError2] = useState(null);
+  const [loading1, setLoading1] = useState(false);
+  const [loading2, setLoading2] = useState(false);
 
   useEffect(() => {
     console.log(account)
@@ -49,6 +53,10 @@ const Faucet = ({ account }) => {
           setTokenSymbol1(symbol1);
           const symbol2 = await contract2.symbol();
           setTokenSymbol2(symbol2);
+          const decimals1 = await contract1.decimals();
+          setDecimals1(decimals1);
+          const decimals2 = await contract2.decimals();
+          setDecimals2(decimals2);
         }
       } catch (error) {
         console.error('Error fetching token symbols:', error);
@@ -59,8 +67,9 @@ const Faucet = ({ account }) => {
 
   const mintTokens1 = async () => {
     try {
-      if (!contract1 || !amount1) return;
-      const parsedAmount = ethers.parseEther(amount1);
+      if (!contract1 || !amount1 || !decimals1) return;
+      setLoading1(true);
+      const parsedAmount = ethers.parseUnits(amount1, decimals1);
       const tx = await contract1.mint(account, parsedAmount);
       const transactionHash = tx.hash;
       setTransactionHash1(transactionHash);
@@ -70,16 +79,19 @@ const Faucet = ({ account }) => {
         await new Promise(resolve => setTimeout(resolve, 3000));
       }
       setTransactionHashFinal1(transactionHash);
+      setLoading1(false);
     } catch (error) {
       console.error('Error minting tokens 1:', error);
       setError1(error.message);
+      setLoading1(false);
     }
   };
 
   const mintTokens2 = async () => {
     try {
-      if (!contract2 || !amount2) return;
-      const parsedAmount = ethers.parseEther(amount2);
+      if (!contract2 || !amount2 || !decimals2) return;
+      setLoading2(true);
+      const parsedAmount = ethers.parseUnits(amount2, decimals2);
       const tx = await contract2.mint(account, parsedAmount);
       const transactionHash = tx.hash;
       setTransactionHash2(transactionHash);
@@ -89,9 +101,11 @@ const Faucet = ({ account }) => {
         await new Promise(resolve => setTimeout(resolve, 3000));
       }
       setTransactionHashFinal2(transactionHash);
+      setLoading2(false);
     } catch (error) {
       console.error('Error minting tokens 2:', error);
       setError2(error.message);
+      setLoading2(false);
     }
   };
 
@@ -112,7 +126,15 @@ const Faucet = ({ account }) => {
             value={amount1}
             onChange={(e) => setAmount1(e.target.value)}
           />
-          <button className="btn btn-primary" onClick={mintTokens1}>Mint Tokens</button>
+          <button className="btn btn-primary" onClick={mintTokens1} disabled={loading1}>
+            {loading1 ? (
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              'Mint Tokens'
+            )}
+          </button>
         </div>
         {transactionHash1 && !transactionHashFinal1 && (
           <div className="alert alert-info">
@@ -148,7 +170,15 @@ const Faucet = ({ account }) => {
             value={amount2}
             onChange={(e) => setAmount2(e.target.value)}
           />
-          <button className="btn btn-primary" onClick={mintTokens2}>Mint Tokens</button>
+          <button className="btn btn-primary" onClick={mintTokens2} disabled={loading2}>
+            {loading2 ? (
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              'Mint Tokens'
+            )}
+          </button>
         </div>
         {transactionHash2 && !transactionHashFinal2 && (
           <div className="alert alert-info">
