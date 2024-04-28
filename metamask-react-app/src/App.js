@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Start from './Start';
 import Faucet from './Faucet';
 import Tokenize from './Tokenize';
+import UpToken from './UpToken';
+import CapToken from './CapToken';
 
 const App = () => {
   const [account, setAccount] = useState('');
@@ -41,6 +43,16 @@ const App = () => {
                   <Link className="nav-link" to="/tokenize">Tokenize</Link>
                 </li>
               </ul>
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/uptoken">UpToken</Link>
+                </li>
+              </ul>
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/captoken">CapToken</Link>
+                </li>
+              </ul>
               {account ? (
                 <button className="btn btn-primary me-2">{`${account.slice(0, 5)}...${account.slice(-5)}`}</button>
               ) : (
@@ -54,6 +66,8 @@ const App = () => {
           <Route path="/" element={<Start />} />
           <Route path="/faucet" element={<Faucet account={account} />} />
           <Route path="/tokenize" element={<Tokenize account={account} />} />
+          <Route path="/uptoken" element={<UpToken account={account} />} />
+          <Route path="/captoken" element={<CapToken account={account} />} />
         </Routes>
       </div>
     </Router>

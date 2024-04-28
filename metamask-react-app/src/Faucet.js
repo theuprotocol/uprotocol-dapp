@@ -111,95 +111,103 @@ const Faucet = ({ account }) => {
 
   return (
     <div className="container mt-5">
-      <h1 className="mb-4">Faucet</h1>
-      <div className="mb-3">
-        <h4>Mint 
-          <a href={`https://sepolia.scrollscan.com/address/${MockERC20_Address_XYZ}`} className="ms-2" target="_blank" rel="noopener noreferrer">
-            {tokenSymbol1}
-          </a>
-        </h4>
-        <div className="input-group mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Amount to mint"
-            value={amount1}
-            onChange={(e) => setAmount1(e.target.value)}
-          />
-          <button className="btn btn-primary" onClick={mintTokens1} disabled={loading1}>
-            {loading1 ? (
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            ) : (
-              'Mint Tokens'
-            )}
-          </button>
+      {account ? (
+        <>
+        <h1 className="mb-4">Faucet</h1>
+        <div className="mb-3">
+          <h4>Mint 
+            <a href={`https://sepolia.scrollscan.com/address/${MockERC20_Address_XYZ}`} className="ms-2" target="_blank" rel="noopener noreferrer">
+              {tokenSymbol1}
+            </a>
+          </h4>
+          <div className="input-group mb-3">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Amount to mint"
+              value={amount1}
+              onChange={(e) => setAmount1(e.target.value)}
+            />
+            <button className="btn btn-primary" onClick={mintTokens1} disabled={loading1}>
+              {loading1 ? (
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                'Mint Tokens'
+              )}
+            </button>
+          </div>
+          {transactionHash1 && !transactionHashFinal1 && (
+            <div className="alert alert-info">
+              Transaction submitted, Hash: <a href={`https://sepolia.scrollscan.com/tx/${transactionHash1}`} target="_blank" rel="noopener noreferrer">
+                {transactionHash1}
+              </a>
+            </div>
+          )}
+          {transactionHash1 && transactionHashFinal1 && (
+            <div className="alert alert-success">
+              Transaction success, Hash: <a href={`https://sepolia.scrollscan.com/tx/${transactionHashFinal1}`} target="_blank" rel="noopener noreferrer">
+                {transactionHashFinal1}
+              </a>
+            </div>
+          )}
+          {error1 && (
+            <div className="alert alert-danger">
+              Error: {error1}
+            </div>
+          )}
         </div>
-        {transactionHash1 && !transactionHashFinal1 && (
-          <div className="alert alert-info">
-            Transaction submitted, Hash: <a href={`https://sepolia.scrollscan.com/tx/${transactionHash1}`} target="_blank" rel="noopener noreferrer">
-              {transactionHash1}
+        <div>
+          <h4>Mint 
+            <a href={`https://sepolia.scrollscan.com/address/${MockERC20_Address_USDC}`} className="ms-2" target="_blank" rel="noopener noreferrer">
+              {tokenSymbol2}
             </a>
+          </h4>
+          <div className="input-group mb-3">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Amount to mint"
+              value={amount2}
+              onChange={(e) => setAmount2(e.target.value)}
+            />
+            <button className="btn btn-primary" onClick={mintTokens2} disabled={loading2}>
+              {loading2 ? (
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                'Mint Tokens'
+              )}
+            </button>
           </div>
-        )}
-        {transactionHash1 && transactionHashFinal1 && (
-          <div className="alert alert-success">
-            Transaction success, Hash: <a href={`https://sepolia.scrollscan.com/tx/${transactionHashFinal1}`} target="_blank" rel="noopener noreferrer">
-              {transactionHashFinal1}
-            </a>
-          </div>
-        )}
-        {error1 && (
-          <div className="alert alert-danger">
-            Error: {error1}
-          </div>
-        )}
-      </div>
-      <div>
-        <h4>Mint 
-          <a href={`https://sepolia.scrollscan.com/address/${MockERC20_Address_USDC}`} className="ms-2" target="_blank" rel="noopener noreferrer">
-            {tokenSymbol2}
-          </a>
-        </h4>
-        <div className="input-group mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Amount to mint"
-            value={amount2}
-            onChange={(e) => setAmount2(e.target.value)}
-          />
-          <button className="btn btn-primary" onClick={mintTokens2} disabled={loading2}>
-            {loading2 ? (
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            ) : (
-              'Mint Tokens'
-            )}
-          </button>
+          {transactionHash2 && !transactionHashFinal2 && (
+            <div className="alert alert-info">
+              Transaction submitted, Hash: <a href={`https://sepolia.scrollscan.com/tx/${transactionHash2}`} target="_blank" rel="noopener noreferrer">
+                {transactionHash2}
+              </a>
+            </div>
+          )}
+          {transactionHash2 && transactionHashFinal2 && (
+            <div className="alert alert-success">
+              Transaction success, Hash: <a href={`https://sepolia.scrollscan.com/tx/${transactionHashFinal2}`} target="_blank" rel="noopener noreferrer">
+                {transactionHashFinal2}
+              </a>
+            </div>
+          )}
+          {error2 && (
+            <div className="alert alert-danger">
+              Error: {error2}
+            </div>
+          )}
         </div>
-        {transactionHash2 && !transactionHashFinal2 && (
-          <div className="alert alert-info">
-            Transaction submitted, Hash: <a href={`https://sepolia.scrollscan.com/tx/${transactionHash2}`} target="_blank" rel="noopener noreferrer">
-              {transactionHash2}
-            </a>
-          </div>
-        )}
-        {transactionHash2 && transactionHashFinal2 && (
-          <div className="alert alert-success">
-            Transaction success, Hash: <a href={`https://sepolia.scrollscan.com/tx/${transactionHashFinal2}`} target="_blank" rel="noopener noreferrer">
-              {transactionHashFinal2}
-            </a>
-          </div>
-        )}
-        {error2 && (
-          <div className="alert alert-danger">
-            Error: {error2}
-          </div>
-        )}
+      </>
+    ) : (
+      <div className="alert alert-warning" role="alert">
+        Please connect your wallet.
       </div>
+      )}
     </div>
   );
 };

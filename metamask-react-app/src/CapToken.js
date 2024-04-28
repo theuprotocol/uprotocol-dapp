@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { UP_TOKEN_ADDR, UP_TOKEN_ABI, MockERC20_ABI, CAP_TOKEN_ADDR, CAP_TOKEN_ABI } from './smartContracts'; // Import contract ABI and address
 
-const TokenizePage = ({ account }) => {
+const CapToken = ({ account }) => {
   const [, setProvider] = useState(null);
   const [upTokenContract, setUpTokenContract] = useState(null);
   const [underlyingTokenContract, setUnderlyingTokenContract] = useState(null);
@@ -132,17 +132,17 @@ const TokenizePage = ({ account }) => {
             <div className="mb-3">
               <div className="row">
                 <div className="col">
-                  <p className="fw-bold">⚖️ Your Balances:</p>
+                  <p className="fw-bold">Balances:</p>
                   <p>{ethers.formatUnits(underlyingTokenBal.toString(), underlyingTokenDecimals).toString()} {underlyingSymbol}</p>
                   <p>{ethers.formatUnits(upTokenBal.toString(), underlyingTokenDecimals).toString()} {upTokenSymbol}</p>
                   <p>{ethers.formatUnits(capTokenBal.toString(), underlyingTokenDecimals).toString()} {capTokenSymbol}</p>
                 </div>
                 <div className="col">
-                  <p className="fw-bold">⌛ UpToken Expiry:</p>
+                  <p className="fw-bold">Expiry:</p>
                   <p>{new Date(Number(upTokenExpiry) * 1000).toLocaleDateString()}</p>
                 </div>
                 <div className="col">
-                  <p className="fw-bold">📈 UpToken Strike:</p>
+                  <p className="fw-bold">Strike:</p>
                   <p>{upTokenStrike && settlementTokenDecimals ? (ethers.formatUnits(upTokenStrike.toString(), settlementTokenDecimals)).toString() + " " + settlementTokenSymbol : <div className="spinner-border" role="status"><span className="visually-hidden">Loading...</span></div>}</p>
                 </div>
               </div>
@@ -203,11 +203,11 @@ const TokenizePage = ({ account }) => {
         </>
       ) : (
         <div className="alert alert-warning" role="alert">
-          Please connect your wallet or wait while loading...
+          Please connect your wallet.
         </div>
       )}
     </div>
   );
 };
 
-export default TokenizePage;
+export default CapToken;
