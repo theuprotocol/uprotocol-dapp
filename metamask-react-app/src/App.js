@@ -53,7 +53,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Start />} />
           <Route path="/faucet" element={<Faucet account={account} />} />
-          <Route path="/tokenize" element={<Tokenize />} />
+          <Route path="/tokenize" element={<Tokenize account={account} />} />
         </Routes>
       </div>
     </Router>
