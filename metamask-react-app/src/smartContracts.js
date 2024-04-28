@@ -355,4 +355,6 @@ export const MockERC20_ABI = [
   ]
 
   
-export const MockERC20_Address = '0xB238A96A10A517423a91795F543956dcCeBb8ac3';
+export const MockERC20_Address_XYZ = '0xB238A96A10A517423a91795F543956dcCeBb8ac3';
+
+export const MockERC20_Address_USDC = '0xB238A96A10A517423a91795F543956dcCeBb8ac3';
