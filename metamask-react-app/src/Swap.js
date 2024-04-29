@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { UP_TOKEN_ADDR, UP_TOKEN_ABI, MockERC20_ABI, CAP_TOKEN_ADDR, CAP_TOKEN_ABI } from './smartContracts'; // Import contract ABI and address
 
-const CapToken = ({ account }) => {
+const Swap = ({ account }) => {
   const [, setProvider] = useState(null);
   const [upTokenContract, setUpTokenContract] = useState(null);
   const [underlyingTokenContract, setUnderlyingTokenContract] = useState(null);
@@ -125,4 +125,4 @@ const CapToken = ({ account }) => {
   );
 };
 
-export default CapToken;
+export default Swap;
