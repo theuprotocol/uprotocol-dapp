@@ -8,11 +8,11 @@ const TokenizePage = ({ account }) => {
   const [underlyingTokenContract, setUnderlyingTokenContract] = useState(null);
   const [underlyingTokenAddress, setUnderlyingTokenAddress] = useState(null);
   const [upTokenSymbol, setUpTokenSymbol] = useState(null);
-  const [capTokenContract, setCapTokenContract] = useState(null);
+  const [, setCapTokenContract] = useState(null);
   const [capTokenSymbol, setCapTokenSymbol] = useState(null);
   const [upTokenStrike, setUpTokenStrike] = useState(null);
   const [upTokenExpiry, setUpTokenExpiry] = useState(null);
-  const [settlementTokenAddress, setSettlementTokenAddress] = useState(null);
+  const [, setSettlementTokenAddress] = useState(null);
   const [settlementTokenDecimals, setSettlementTokenDecimals] = useState(null);
   const [settlementTokenSymbol, setSettlementTokenSymbol] = useState(null);
   const [underlyingSymbol, setUnderlyingSymbol] = useState(null);
@@ -128,7 +128,7 @@ const TokenizePage = ({ account }) => {
             and{' '}
             <a href={`https://sepolia.scrollscan.com/address/${CAP_TOKEN_ADDR}`} className="ms-2" target="_blank" rel="noopener noreferrer">{capTokenSymbol}</a>
           </h1>
-          {allowance.toString() == (ethers.MaxUint256).toString() ? (
+          {allowance.toString() === (ethers.MaxUint256).toString() ? (
             <div className="mb-3">
               <div className="row">
                 <div className="col">

@@ -103,7 +103,7 @@ const UpTokenPage = ({ account }) => {
       {account && !loadingData ? (
         <>
           <h1 className="mb-4">Exercise {upTokenSymbol}</h1>
-          {allowance.toString() == (ethers.MaxUint256).toString() ? (
+          {allowance.toString() === (ethers.MaxUint256).toString() ? (
             <div className="mb-3">
               <div className="row">
                 <div className="col">
